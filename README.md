@@ -1,9 +1,10 @@
 # CompactData library written in TypeScript
 
 ```javascript
-const CompactData = require('@numtechnology/compactdata');
+const CompactData = require("@numtechnology/compactdata");
 
-const cdObject = CompactData.Parser.parse('a=b')
-
-console.log(cdObject);
+console.log(CompactData.parse("foo=bar"));
+//-> { foo: "bar" }
+console.log(CompactData.stringify({ foo: "bar" }))
+//-> foo=bar
 ```
