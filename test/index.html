@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CompactData Testbed</title>
+  <style>
+    * {
+    box-sizing: border-box;
+    }
+
+    textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+    }
+
+    .outer {
+    width: 100%;
+    }
+    .rawdata {
+    float: left;
+    width: 33%;
+    padding-right: 5%;
+    }
+
+    .mapping {
+    float: left;
+    width: 33%;
+    padding-right: 5%;
+    }
+
+    .result {
+    float: left;
+    width: 34%;
+    }
+
+    .errors {
+    color: red;
+    }    
+  </style>
+</head>
+
+<body>
+  <script src="../dist/bundle.js"></script>
+  <div class="outer">
+    <h1>CompactData Testbed</h1>
+    <div class="rawdata">
+      <h3>Raw CompactData</h3>
+      <textarea class="input" rows="20" id="data"></textarea>
+      <p class="errors" id="rawDataErrors"></p>
+      <p><input type="button" value="Execute" id='execute' onclick="execute()"></p>
+    </div>
+    <div class="result">
+      <h3>Result</h3>
+      <textarea class="input" rows="20" readonly="true" id="result"></textarea>
+      <p class="errors" id="resultErrors"></p>
+    </div>
+  </div>
+
+  <script>
+    console.log(CompactData);
+    const execute = () => {
+      try {
+        document.getElementById("rawDataErrors").innerHTML = "";
+        const data = document.getElementById("data").value;
+        if (data) {
+          const expanded = CompactData.parse(data);
+
+          document.getElementById("result").value = JSON.stringify(expanded,null,'  ');
+        }
+      } catch (e) {
+        document.getElementById("rawDataErrors").innerHTML = e.message;
+      }
+    };
+  </script>
+
+</body>
+
+</html>
